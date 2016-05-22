@@ -1,0 +1,46 @@
+<!doctype html>
+<title>Toggle fun</title>
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+
+{% for led_button in ledstatus %}
+  {% for led, status in led_button.items() %}
+    <button id="ledbutton{{led}}" class="{% if status == 1 %}on{% else %}off{% endif %}" onclick="toggleLed({{led}});">{{led}}</button>
+  {% endfor %}
+{% endfor %}
+
+<div id="logging"></div>
+<script type="text/javascript">
+function setLedButtonClass(led_id, led_status) {
+    var ledbutton = document.getElementById('ledbutton' + led_id);
+    var status = (led_status == 1 ? "on" : "off");
+    ledbutton.className = status;
+}
+
+function toggleLedButtonClass(led_id){
+    var ledbutton = document.getElementById('ledbutton' + led_id);
+    var currentClass = ledbutton.className;
+    if (currentClass == 'off') {
+        setLedButtonClass(led_id, 1);
+    } else {
+        setLedButtonClass(led_id, 0);
+    }
+}
+
+function toggleLed(led) {
+  var xhr = new XMLHttpRequest();
+  xhr.onreadystatechange = function() {
+      if (xhr.readyState == XMLHttpRequest.DONE) {
+        var loggingDiv = document.getElementById('logging');
+        loggingDiv.innerHTML = xhr.responseText + '<br>' + loggingDiv.innerHTML;
+        toggleLedButtonClass(led);
+      }
+  }
+  xhr.open('GET', '/toggle/' + led, true);
+  xhr.send(null);
+}
+(function() {
+  var ledstatus = '{{ ledstatus }}';
+  console.log(ledstatus);
+  // setLedButtonClass()
+})();
+</script>
