@@ -16,5 +16,5 @@ wifi.sta.config(ssid,pass)
 -- wifi config end
 
 -- Run the main file
-dofile("main.lua")
+dofile("server.lua")
 
