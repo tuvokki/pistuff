@@ -59,7 +59,7 @@ try:
             print SEQ[LEFT_COUNTER]
         print "Rolling left"
         for pin in range(0, 4):
-            xpin = RGHT_PINS[pin]  # Get GPIO
+            xpin = LEFT_PINS[pin]  # Get GPIO
             if SEQ[LEFT_COUNTER][pin] != 0:
                 if DEBUG:
                     print " Enable GPIO %i" % (xpin)
@@ -105,4 +105,3 @@ try:
 except KeyboardInterrupt:
     # GPIO netjes afsluiten
     GPIO.cleanup()
-
