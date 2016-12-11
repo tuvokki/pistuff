@@ -10,7 +10,8 @@ GPIO.setmode(GPIO.BCM)
 # Zet waarschuwingen uit.
 GPIO.setwarnings(False)
 # Stel de GPIO pinnen in voor de stappenmotor:
-StepPins = [21,20,16,12]
+# StepPins = [21,20,16,12]
+StepPins = [17,22,23,24]
 
 # Set alle pinnen als uitgang.
 for pin in StepPins:
