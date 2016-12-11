@@ -99,9 +99,10 @@ try:
             RGHT_COUNTER = STEP_COUNT + STEP_RGHT
 
         # Wait before moving on
-        print "Waiting for " + WAIT_TIME
+        print "Waiting for {}".format(WAIT_TIME)
         time.sleep(WAIT_TIME)
 
 except KeyboardInterrupt:
     # GPIO netjes afsluiten
     GPIO.cleanup()
+
