@@ -4,6 +4,8 @@ import sys
 import time
 import RPi.GPIO as GPIO
 
+DEBUG = False
+
 # Use BCM GPIO references
 # instead of physical pin numbers
 GPIO.setmode(GPIO.BCM)
@@ -12,11 +14,14 @@ GPIO.setmode(GPIO.BCM)
 # Physical pins 11,15,16,18
 # GPIO17,GPIO22,GPIO23,GPIO24
 
-STEP_PINS = [19, 20, 21, 26]
+LEFT_PINS = [17, 22, 23, 24]
+RGHT_PINS = [19, 20, 21, 26]
 
 # Set all pins as output
-for pin in STEP_PINS:
-    print "Setup pins"
+for pin in RGHT_PINS:
+    GPIO.setup(pin, GPIO.OUT)
+    GPIO.output(pin, False)
+for pin in LEFT_PINS:
     GPIO.setup(pin, GPIO.OUT)
     GPIO.output(pin, False)
 
@@ -32,7 +37,8 @@ SEQ = [[1, 0, 0, 1],
        [0, 0, 0, 1]]
 
 STEP_COUNT = len(SEQ)
-STEP_DIR = 1  # Set to 1 or 2 for clockwise
+STEP_LEFT = -1  # Set to 1 or 2 for clockwise
+STEP_RGHT = 1  # Set to 1 or 2 for clockwise
 # Set to -1 or -2 for anti-clockwise
 
 # Read wait time from command line
@@ -42,31 +48,52 @@ else:
     WAIT_TIME = 10 / float(1000)
 
 # Initialise variables
-STEP_COUNTER = 0
+LEFT_COUNTER = 0
+RGHT_COUNTER = 0
 
 # Start main loop
 try:
     while True:
 
-        print STEP_COUNTER,
-        print SEQ[STEP_COUNTER]
+        print LEFT_COUNTER,
+        print SEQ[LEFT_COUNTER]
 
         for pin in range(0, 4):
-            xpin = STEP_PINS[pin]  # Get GPIO
-            if SEQ[STEP_COUNTER][pin] != 0:
+            xpin = RGHT_PINS[pin]  # Get GPIO
+            if SEQ[LEFT_COUNTER][pin] != 0:
                 print " Enable GPIO %i" % (xpin)
                 GPIO.output(xpin, True)
             else:
                 GPIO.output(xpin, False)
 
-        STEP_COUNTER += STEP_DIR
+        LEFT_COUNTER += STEP_LEFT
 
         # If we reach the end of the sequence
         # start again
-        if STEP_COUNTER >= STEP_COUNT:
-            STEP_COUNTER = 0
-        if STEP_COUNTER < 0:
-            STEP_COUNTER = STEP_COUNT + STEP_DIR
+        if LEFT_COUNTER >= STEP_COUNT:
+            LEFT_COUNTER = 0
+        if LEFT_COUNTER < 0:
+            LEFT_COUNTER = STEP_COUNT + STEP_LEFT
+
+        print RGHT_COUNTER,
+        print SEQ[RGHT_COUNTER]
+
+        for pin in range(0, 4):
+            xpin = RGHT_PINS[pin]  # Get GPIO
+            if SEQ[RGHT_COUNTER][pin] != 0:
+                print " Enable GPIO %i" % (xpin)
+                GPIO.output(xpin, True)
+            else:
+                GPIO.output(xpin, False)
+
+        RGHT_COUNTER += STEP_RGHT
+
+        # If we reach the end of the sequence
+        # start again
+        if RGHT_COUNTER >= STEP_COUNT:
+            RGHT_COUNTER = 0
+        if RGHT_COUNTER < 0:
+            RGHT_COUNTER = STEP_COUNT + STEP_RGHT
 
         # Wait before moving on
         time.sleep(WAIT_TIME)
