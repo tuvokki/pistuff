@@ -11,7 +11,16 @@ GPIO.setmode(GPIO.BCM)
 # Define GPIO signals to use
 # Physical pins 11,15,16,18
 # GPIO17,GPIO22,GPIO23,GPIO24
+
+#STEP_PINS = [17,22,23,24]
 STEP_PINS = [19, 20, 21, 26]
+
+# Set all pins as output
+for pin in STEP_PINS:
+    print "Setup pins"
+    GPIO.setup(pin, GPIO.OUT)
+    GPIO.output(pin, False)
+
 # Define advanced sequence
 # as shown in manufacturers datasheet
 SEQ = [[1, 0, 0, 1],
@@ -66,3 +75,4 @@ try:
 except KeyboardInterrupt:
     # GPIO netjes afsluiten
     GPIO.cleanup()
+
