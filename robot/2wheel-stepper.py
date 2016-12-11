@@ -54,14 +54,15 @@ RGHT_COUNTER = 0
 # Start main loop
 try:
     while True:
-
-        print LEFT_COUNTER,
-        print SEQ[LEFT_COUNTER]
-
+        if DEBUG:
+            print LEFT_COUNTER,
+            print SEQ[LEFT_COUNTER]
+        print "Rolling left"
         for pin in range(0, 4):
             xpin = RGHT_PINS[pin]  # Get GPIO
             if SEQ[LEFT_COUNTER][pin] != 0:
-                print " Enable GPIO %i" % (xpin)
+                if DEBUG:
+                    print " Enable GPIO %i" % (xpin)
                 GPIO.output(xpin, True)
             else:
                 GPIO.output(xpin, False)
@@ -75,13 +76,15 @@ try:
         if LEFT_COUNTER < 0:
             LEFT_COUNTER = STEP_COUNT + STEP_LEFT
 
-        print RGHT_COUNTER,
-        print SEQ[RGHT_COUNTER]
-
+        if DEBUG:
+            print RGHT_COUNTER,
+            print SEQ[RGHT_COUNTER]
+        print "Rolling right"
         for pin in range(0, 4):
             xpin = RGHT_PINS[pin]  # Get GPIO
             if SEQ[RGHT_COUNTER][pin] != 0:
-                print " Enable GPIO %i" % (xpin)
+                if DEBUG:
+                    print " Enable GPIO %i" % (xpin)
                 GPIO.output(xpin, True)
             else:
                 GPIO.output(xpin, False)
@@ -96,6 +99,7 @@ try:
             RGHT_COUNTER = STEP_COUNT + STEP_RGHT
 
         # Wait before moving on
+        print "Waiting for " + WAIT_TIME
         time.sleep(WAIT_TIME)
 
 except KeyboardInterrupt:
