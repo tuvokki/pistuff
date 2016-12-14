@@ -92,7 +92,7 @@ try:
     LEFT_THREAD.start()
 
 
-except KeyboardInterrupt:
+except (KeyboardInterrupt, SystemExit):
     # GPIO netjes afsluiten
     GPIO.cleanup()
     # threads opruimen
