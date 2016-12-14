@@ -15,7 +15,8 @@ logging.basicConfig(format='[%(levelname)s] (%(threadName)-10s) %(message)s',)
 # help info
 PARSER = argparse.ArgumentParser(description='Laat de auto rijden.')
 # PARSER.add_argument('--loglevel', help='log alles', default='info')
-PARSER.add_argument("--verbosity", help="increase output verbosity")
+PARSER.add_argument("-v", "--verbose", help="increase output verbosity",
+                    action="store_true")
 PARSER.add_argument(
     '--direction', help='Set to 1 for clockwise and -1 for anti-clockwise', type=int, default=1)
 PARSER.add_argument(
