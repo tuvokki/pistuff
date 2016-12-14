@@ -47,23 +47,23 @@ else:
 
 def worker(pins, waittime, direction):
     """ The worker """
-    t = threading.currentThread()
+    cur_thr = threading.currentThread()
 
     # Set all pins as output
     for pin in pins:
-        print "Setup pins"
+        logging.debug('Setup pins')
         GPIO.setup(pin, GPIO.OUT)
         GPIO.output(pin, False)
     counter = 0
-    while getattr(t, "do_run", True):
+    while getattr(cur_thr, "do_run", True):
 
-        print counter,
-        print SEQ[counter]
+        logging.debug(counter)
+        logging.debug(SEQ[counter])
 
         for pin in range(0, 4):
             xpin = pins[pin]  # Get GPIO
             if SEQ[counter][pin] != 0:
-                print " Enable GPIO %i" % (xpin)
+                logging.debug('Enable GPIO %i', xpin)
                 GPIO.output(xpin, True)
             else:
                 GPIO.output(xpin, False)
@@ -84,7 +84,7 @@ def worker(pins, waittime, direction):
 RIGHT_THREAD = threading.Thread(
     name='right_wheel', target=worker, args=(STEP_PINS_RIGHT, WAIT_TIME, 1,))
 LEFT_THREAD = threading.Thread(
-    name='left_wheel', target=worker, args=(STEP_PINS_RIGHT, WAIT_TIME, -1,))
+    name='left_wheel', target=worker, args=(STEP_PINS_LEFT, WAIT_TIME, -1,))
 
 # Start main loop
 try:
