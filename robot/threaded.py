@@ -23,7 +23,7 @@ PARSER.add_argument(
 PARSER.add_argument(
     '--speed', help='How fast must the car drive', type=int, default=1)
 ARGS = PARSER.parse_args()
-LOGLEVEL = ARGS.loglevel
+# LOGLEVEL = ARGS.loglevel
 DIRECTION = ARGS.direction
 DRIVE_TIME = ARGS.seconds
 WAIT_TIME = ARGS.speed / float(1000)
