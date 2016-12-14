@@ -18,8 +18,8 @@ GPIO.setmode(GPIO.BCM)
 # Physical pins 11,15,16,18
 # GPIO17,GPIO22,GPIO23,GPIO24
 
-STEP_PINS = [19, 20, 21, 26]
-
+STEP_PINS_RIGHT = [19, 20, 21, 26]
+STEP_PINS_LEFT = [17, 22, 23, 24]
 
 # Define advanced sequence
 # as shown in manufacturers datasheet
@@ -41,6 +41,7 @@ if len(sys.argv) > 1:
     WAIT_TIME = int(sys.argv[1]) / float(1000)
 else:
     WAIT_TIME = 10 / float(1000)
+
 
 def worker(pins, waittime, direction):
     """ The worker """
@@ -78,16 +79,20 @@ def worker(pins, waittime, direction):
         time.sleep(waittime)
 
 
-WORKER_THREAD = threading.Thread(name='worker', target=worker, args=(STEP_PINS, WAIT_TIME, 1,))
+RIGHT_THREAD = threading.Thread(
+    name='right_wheel', target=worker, args=(STEP_PINS_RIGHT, WAIT_TIME, 1,))
+LEFT_THREAD = threading.Thread(
+    name='left_wheel', target=worker, args=(STEP_PINS_RIGHT, WAIT_TIME, -1,))
 
 # Start main loop
 try:
-    WORKER_THREAD.start()
+    RIGHT_THREAD.start()
+    LEFT_THREAD.start()
 
 
 except KeyboardInterrupt:
     # GPIO netjes afsluiten
     GPIO.cleanup()
-    #threads opruimen
+    # threads opruimen
     t.do_run = False
     t.join()
