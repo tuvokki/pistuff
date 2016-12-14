@@ -7,10 +7,22 @@ import sys
 import logging
 import threading
 import time
+import argparse
 import RPi.GPIO as GPIO
 
 logging.basicConfig(level=logging.DEBUG,
                     format='[%(levelname)s] (%(threadName)-10s) %(message)s',)
+
+# help info
+PARSER = argparse.ArgumentParser(description='Laat de auto rijden.')
+PARSER.add_argument('loglevel', help='log alles', default='info')
+PARSER.add_argument(
+    'direction', help='Set to 1 for clockwise and -1 for anti-clockwise', type=int, default=1)
+ARGS = PARSER.parse_args()
+LOGLEVEL = ARGS.loglevel
+
+# set log level
+getattr(logging, LOGLEVEL.upper())
 
 # Use BCM GPIO references
 # instead of physical pin numbers
@@ -47,6 +59,7 @@ else:
 
 def worker(pins, waittime, direction):
     """ The worker """
+    logging.info('Starting thread')
     cur_thr = threading.currentThread()
 
     # Set all pins as output
