@@ -96,5 +96,7 @@ except KeyboardInterrupt:
     # GPIO netjes afsluiten
     GPIO.cleanup()
     # threads opruimen
-    t.do_run = False
-    t.join()
+    RIGHT_THREAD.do_run = False
+    RIGHT_THREAD.join()
+    LEFT_THREAD.do_run = False
+    LEFT_THREAD.join()
