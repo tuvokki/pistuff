@@ -10,12 +10,12 @@ import time
 import argparse
 import RPi.GPIO as GPIO
 
-logging.basicConfig(level=logging.DEBUG,
-                    format='[%(levelname)s] (%(threadName)-10s) %(message)s',)
+logging.basicConfig(format='[%(levelname)s] (%(threadName)-10s) %(message)s',)
 
 # help info
 PARSER = argparse.ArgumentParser(description='Laat de auto rijden.')
-PARSER.add_argument('--loglevel', help='log alles', default='info')
+# PARSER.add_argument('--loglevel', help='log alles', default='info')
+PARSER.add_argument("--verbosity", help="increase output verbosity")
 PARSER.add_argument(
     '--direction', help='Set to 1 for clockwise and -1 for anti-clockwise', type=int, default=1)
 PARSER.add_argument(
@@ -29,7 +29,8 @@ DRIVE_TIME = ARGS.seconds
 WAIT_TIME = ARGS.speed / float(1000)
 
 # set log level
-getattr(logging, LOGLEVEL.upper())
+if ARGS.verbosity:
+    logging.getLogger().setLevel(logging.DEBUG)
 
 # Use BCM GPIO references
 # instead of physical pin numbers
