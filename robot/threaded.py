@@ -97,6 +97,8 @@ try:
     RIGHT_THREAD.join()
     LEFT_THREAD.do_run = False
     LEFT_THREAD.join()
+    # GPIO netjes afsluiten
+    GPIO.cleanup()
 
 
 except (KeyboardInterrupt, SystemExit):
