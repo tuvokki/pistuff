@@ -90,13 +90,15 @@ LEFT_THREAD = threading.Thread(
 try:
     RIGHT_THREAD.start()
     LEFT_THREAD.start()
-
-
-except (KeyboardInterrupt, SystemExit):
-    # GPIO netjes afsluiten
-    GPIO.cleanup()
+    # laat 5 seconden rijden
+    time.sleep(5)
     # threads opruimen
     RIGHT_THREAD.do_run = False
     RIGHT_THREAD.join()
     LEFT_THREAD.do_run = False
     LEFT_THREAD.join()
+
+
+except (KeyboardInterrupt, SystemExit):
+    # GPIO netjes afsluiten
+    GPIO.cleanup()
