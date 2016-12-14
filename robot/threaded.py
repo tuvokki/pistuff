@@ -20,10 +20,13 @@ PARSER.add_argument(
     'direction', help='Set to 1 for clockwise and -1 for anti-clockwise', type=int, default=1)
 PARSER.add_argument(
     'seconds', help='How long must the car drive', type=int, default=1)
+PARSER.add_argument(
+    'speed', help='How fast must the car drive', type=int, default=1)
 ARGS = PARSER.parse_args()
 LOGLEVEL = ARGS.loglevel
 DIRECTION = ARGS.direction
 DRIVE_TIME = ARGS.seconds
+WAIT_TIME = ARGS.speed / float(1000)
 
 # set log level
 getattr(logging, LOGLEVEL.upper())
@@ -51,12 +54,6 @@ SEQ = [[1, 0, 0, 1],
        [0, 0, 0, 1]]
 
 STEP_COUNT = len(SEQ)
-
-# Read wait time from command line
-if len(sys.argv) > 1:
-    WAIT_TIME = int(sys.argv[1]) / float(1000)
-else:
-    WAIT_TIME = 10 / float(1000)
 
 
 def worker(pins, waittime, direction):
