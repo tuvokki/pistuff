@@ -43,7 +43,7 @@ STEP_RGHT = 1  # Set to 1 or 2 for clockwise
 
 # Read wait time from command line
 if len(sys.argv) > 1:
-    WAIT_TIME = int(sys.argv[1]) / float(1000)
+    WAIT_TIME = int(sys.argv[1]) / float(2000)
 else:
     WAIT_TIME = 10 / float(1000)
 
