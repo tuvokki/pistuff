@@ -30,7 +30,7 @@ DRIVE_TIME = ARGS.seconds
 WAIT_TIME = ARGS.speed / float(1000)
 
 # set log level
-if ARGS.verbosity:
+if ARGS.verbose:
     logging.getLogger().setLevel(logging.DEBUG)
 
 # Use BCM GPIO references
