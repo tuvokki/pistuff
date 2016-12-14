@@ -18,8 +18,12 @@ PARSER = argparse.ArgumentParser(description='Laat de auto rijden.')
 PARSER.add_argument('loglevel', help='log alles', default='info')
 PARSER.add_argument(
     'direction', help='Set to 1 for clockwise and -1 for anti-clockwise', type=int, default=1)
+PARSER.add_argument(
+    'seconds', help='How long must the car drive', type=int, default=1)
 ARGS = PARSER.parse_args()
 LOGLEVEL = ARGS.loglevel
+DIRECTION = ARGS.direction
+DRIVE_TIME = ARGS.seconds
 
 # set log level
 getattr(logging, LOGLEVEL.upper())
@@ -47,8 +51,6 @@ SEQ = [[1, 0, 0, 1],
        [0, 0, 0, 1]]
 
 STEP_COUNT = len(SEQ)
-STEP_DIR = 1  # Set to 1 or 2 for clockwise
-# Set to -1 or -2 for anti-clockwise
 
 # Read wait time from command line
 if len(sys.argv) > 1:
@@ -95,16 +97,16 @@ def worker(pins, waittime, direction):
 
 
 RIGHT_THREAD = threading.Thread(
-    name='right_wheel', target=worker, args=(STEP_PINS_RIGHT, WAIT_TIME, 1,))
+    name='right_wheel', target=worker, args=(STEP_PINS_RIGHT, WAIT_TIME, DIRECTION,))
 LEFT_THREAD = threading.Thread(
-    name='left_wheel', target=worker, args=(STEP_PINS_LEFT, WAIT_TIME, -1,))
+    name='left_wheel', target=worker, args=(STEP_PINS_LEFT, WAIT_TIME, -DIRECTION,))
 
 # Start main loop
 try:
     RIGHT_THREAD.start()
     LEFT_THREAD.start()
-    # laat 5 seconden rijden
-    time.sleep(5)
+    # laat x seconden rijden
+    time.sleep(DRIVE_TIME)
     # threads opruimen
     RIGHT_THREAD.do_run = False
     RIGHT_THREAD.join()
