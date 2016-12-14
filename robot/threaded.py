@@ -15,13 +15,13 @@ logging.basicConfig(level=logging.DEBUG,
 
 # help info
 PARSER = argparse.ArgumentParser(description='Laat de auto rijden.')
-PARSER.add_argument('loglevel', help='log alles', default='info')
+PARSER.add_argument('--loglevel', help='log alles', default='info')
 PARSER.add_argument(
-    'direction', help='Set to 1 for clockwise and -1 for anti-clockwise', type=int, default=1)
+    '--direction', help='Set to 1 for clockwise and -1 for anti-clockwise', type=int, default=1)
 PARSER.add_argument(
-    'seconds', help='How long must the car drive', type=int, default=1)
+    '--seconds', help='How long must the car drive', type=int, default=1)
 PARSER.add_argument(
-    'speed', help='How fast must the car drive', type=int, default=1)
+    '--speed', help='How fast must the car drive', type=int, default=1)
 ARGS = PARSER.parse_args()
 LOGLEVEL = ARGS.loglevel
 DIRECTION = ARGS.direction
