@@ -3,3 +3,20 @@
 <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
 
 <h3>Drive a car</h3>
+
+<div id="logging"></div>
+<button id="forwardbutton" onclick="driveForward(2)">start</button><br>
+
+<script type="text/javascript">
+  function driveForward(drive_time) {
+    var xhr = new XMLHttpRequest();
+    xhr.onreadystatechange = function () {
+      if (xhr.readyState == XMLHttpRequest.DONE) {
+        var loggingDiv = document.getElementById('logging');
+        loggingDiv.innerHTML = xhr.responseText + '<br>' + loggingDiv.innerHTML;
+      }
+    }
+    xhr.open('GET', '/toggle/' + drive_time, true);
+    xhr.send(null);
+  }
+</script>
