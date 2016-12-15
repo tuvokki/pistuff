@@ -98,3 +98,15 @@ class Movement(object):
         except (KeyboardInterrupt, SystemExit):
             # GPIO netjes afsluiten
             GPIO.cleanup()
+
+    def forward(self, sec):
+        """Move forward"""
+        self.direction = -1
+        self.drive_time = sec
+        self.run()
+
+    def backward(self, sec):
+        """Move backward"""
+        self.direction = 1
+        self.drive_time = sec
+        self.run()
