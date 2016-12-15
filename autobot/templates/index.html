@@ -1,62 +1,101 @@
-<!doctype html>
-<title>Car robot</title>
-<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+<!DOCTYPE html>
+<html lang="en">
 
+<head>
+
+  <!-- Basic Page Needs
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <meta charset="utf-8">
+  <title>A drive thingy</title>
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <!-- Mobile Specific Metas
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- FONT
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <link href="//fonts.googleapis.com/css?family=Raleway:400,300,600" rel="stylesheet" type="text/css">
+
+  <!-- CSS
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='normalize.css') }}">
+  <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='skeleton.css') }}">
+  <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+
+</head>
+
+<body>
+
+  <!-- Primary Page Layout
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <div class="container">
+    <div class="row">
+      <div class="one-half column" style="margin-top: 25%">
 <h3>Drive a car</h3>
 
-<div id="logging"></div>
 <button id="forwardbutton" onclick="driveForward(2)">fwd</button><br>
-<button id="forwardbutton" onclick="driveBackward(2)">back</button><br>
-<button id="forwardbutton" onclick="turnLeft(2)">left</button><br>
-<button id="forwardbutton" onclick="turnRight(2)">right</button><br>
+<button id="backwardbutton" onclick="driveBackward(2)">back</button><br>
+<button id="turnleftdbutton" onclick="turnLeft(2)">left</button><br>
+<button id="turnrightbutton" onclick="turnRight(2)">right</button><br>
+<div id="logging"></div>
+</div>
+</div>
+</div>
 
+<!-- End Document
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
 <script type="text/javascript">
-                                    function driveForward(drive_time) {
-                                      var xhr = new XMLHttpRequest();
-                                      xhr.onreadystatechange = function () {
-                                        if (xhr.readyState == XMLHttpRequest.DONE) {
-                                          var loggingDiv = document.getElementById('logging');
-                                          loggingDiv.innerHTML = xhr.responseText + '<br>' + loggingDiv.innerHTML;
-                                        }
-                                      }
-                                      xhr.open('GET', '/forward/' + drive_time, true);
-                                      xhr.send(null);
-                                    }
+                                              function driveForward(drive_time) {
+                                                var xhr = new XMLHttpRequest();
+                                                xhr.onreadystatechange = function () {
+                                                  if (xhr.readyState == XMLHttpRequest.DONE) {
+                                                    var loggingDiv = document.getElementById('logging');
+                                                    loggingDiv.innerHTML = xhr.responseText + '<br>' + loggingDiv.innerHTML;
+                                                  }
+                                                }
+                                                xhr.open('GET', '/forward/' + drive_time, true);
+                                                xhr.send(null);
+                                              }
 
-                                    function driveBackward(drive_time) {
-                                      var xhr = new XMLHttpRequest();
-                                      xhr.onreadystatechange = function () {
-                                        if (xhr.readyState == XMLHttpRequest.DONE) {
-                                          var loggingDiv = document.getElementById('logging');
-                                          loggingDiv.innerHTML = xhr.responseText + '<br>' + loggingDiv.innerHTML;
-                                        }
-                                      }
-                                      xhr.open('GET', '/backward/' + drive_time, true);
-                                      xhr.send(null);
-                                    }
+                                              function driveBackward(drive_time) {
+                                                var xhr = new XMLHttpRequest();
+                                                xhr.onreadystatechange = function () {
+                                                  if (xhr.readyState == XMLHttpRequest.DONE) {
+                                                    var loggingDiv = document.getElementById('logging');
+                                                    loggingDiv.innerHTML = xhr.responseText + '<br>' + loggingDiv.innerHTML;
+                                                  }
+                                                }
+                                                xhr.open('GET', '/backward/' + drive_time, true);
+                                                xhr.send(null);
+                                              }
 
-                                    function turnLeft(drive_time) {
-                                      var xhr = new XMLHttpRequest();
-                                      xhr.onreadystatechange = function () {
-                                        if (xhr.readyState == XMLHttpRequest.DONE) {
-                                          var loggingDiv = document.getElementById('logging');
-                                          loggingDiv.innerHTML = xhr.responseText + '<br>' + loggingDiv.innerHTML;
-                                        }
-                                      }
-                                      xhr.open('GET', '/left/' + drive_time, true);
-                                      xhr.send(null);
-                                    }
+                                              function turnLeft(drive_time) {
+                                                var xhr = new XMLHttpRequest();
+                                                xhr.onreadystatechange = function () {
+                                                  if (xhr.readyState == XMLHttpRequest.DONE) {
+                                                    var loggingDiv = document.getElementById('logging');
+                                                    loggingDiv.innerHTML = xhr.responseText + '<br>' + loggingDiv.innerHTML;
+                                                  }
+                                                }
+                                                xhr.open('GET', '/left/' + drive_time, true);
+                                                xhr.send(null);
+                                              }
 
-                                    function turnRight(drive_time) {
-                                      var xhr = new XMLHttpRequest();
-                                      xhr.onreadystatechange = function () {
-                                        if (xhr.readyState == XMLHttpRequest.DONE) {
-                                          var loggingDiv = document.getElementById('logging');
-                                          loggingDiv.innerHTML = xhr.responseText + '<br>' + loggingDiv.innerHTML;
-                                        }
-                                      }
-                                      xhr.open('GET', '/right/' + drive_time, true);
-                                      xhr.send(null);
-                                    }
+                                              function turnRight(drive_time) {
+                                                var xhr = new XMLHttpRequest();
+                                                xhr.onreadystatechange = function () {
+                                                  if (xhr.readyState == XMLHttpRequest.DONE) {
+                                                    var loggingDiv = document.getElementById('logging');
+                                                    loggingDiv.innerHTML = xhr.responseText + '<br>' + loggingDiv.innerHTML;
+                                                  }
+                                                }
+                                                xhr.open('GET', '/right/' + drive_time, true);
+                                                xhr.send(null);
+                                              }
 
-</script>
+  </script>
+</body>
+
+</html>
