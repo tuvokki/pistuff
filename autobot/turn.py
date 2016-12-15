@@ -98,3 +98,15 @@ class Turn(object):
         except (KeyboardInterrupt, SystemExit):
             # GPIO netjes afsluiten
             GPIO.cleanup()
+
+    def left(self, sec):
+        """Move left"""
+        self.direction = -1
+        self.drive_time = sec
+        self.run()
+
+    def right(self, sec):
+        """Move right"""
+        self.direction = 1
+        self.drive_time = sec
+        self.run()
