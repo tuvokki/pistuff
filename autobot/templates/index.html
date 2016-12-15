@@ -31,17 +31,33 @@
   <!-- Primary Page Layout
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
   <div class="container">
-    <div class="row">
-      <div class="one-half column" style="margin-top: 25%">
-<h3>Drive a car</h3>
+    <h3>Drive a car</h3>
 
-<button id="forwardbutton" onclick="driveForward(2)">fwd</button><br>
-<button id="backwardbutton" onclick="driveBackward(2)">back</button><br>
-<button id="turnleftdbutton" onclick="turnLeft(2)">left</button><br>
-<button id="turnrightbutton" onclick="turnRight(2)">right</button><br>
+    <div class="row">
+      <div class="one-third column"></div>
+      <div class="one-third column">
+        <button id="forwardbutton" onclick="driveForward(2)">fwd</button>
+</div>
+<div class="one-third column"></div>
+</div>
+<div class="row">
+  <div class="one-third column">
+    <button id="backwardbutton" onclick="driveBackward(2)">back</button>
+</div>
+<div class="one-third column"></div>
+<div class="one-third column">
+  <button id="turnleftdbutton" onclick="turnLeft(2)">left</button>
+</div>
+</div>
+<div class="row">
+  <div class="one-third column"></div>
+  <div class="one-third column">
+    <button id="turnrightbutton" onclick="turnRight(2)">right</button>
+</div>
+<div class="one-third column"></div>
+</div>
+
 <div id="logging"></div>
-</div>
-</div>
 </div>
 
 <!-- End Document
@@ -95,7 +111,7 @@
                                                 xhr.send(null);
                                               }
 
-  </script>
+</script>
 </body>
 
 </html>
