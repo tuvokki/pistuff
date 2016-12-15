@@ -35,5 +35,10 @@ AMOVE.drive_time = 2
 AMOVE.run()
 
 ATURN = Turn()
-ATURN.drive_time = 1
+ATURN.drive_time = 2
+ATURN.direction = -1
 ATURN.run()
+
+AMOVE = Move()
+AMOVE.wait_time = 5
+AMOVE.run()
