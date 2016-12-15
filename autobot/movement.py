@@ -16,7 +16,7 @@ class Movement(object):
 
         self.direction = 1  # forward
         self.drive_time = 1  # seconds
-        self.wait_time = 1 / float(1000)  # speedunit
+        self.wait_time = 10 / float(100)  # speedunit
 
     def worker(self, pins, waittime, move_dir):
         """ The worker """
