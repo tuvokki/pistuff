@@ -14,7 +14,7 @@ def index():
     return render_template('index.html')
 
 
-@APP.route("/forward/<int:seconds>")
+@APP.route("/car/forward/<int:seconds>")
 def forward(seconds):
     """forward method"""
     move_fwd = Move()
@@ -22,7 +22,7 @@ def forward(seconds):
     return "done", seconds
 
 
-@APP.route("/backward/<int:seconds>")
+@APP.route("/car/backward/<int:seconds>")
 def backward(seconds):
     """backward method"""
     move_bwd = Move()
@@ -30,7 +30,7 @@ def backward(seconds):
     return "done", seconds
 
 
-@APP.route("/left/<int:seconds>")
+@APP.route("/car/left/<int:seconds>")
 def left(seconds):
     """left method"""
     turn_lft = Turn()
@@ -38,7 +38,7 @@ def left(seconds):
     return "done", seconds
 
 
-@APP.route("/right/<int:seconds>")
+@APP.route("/car/right/<int:seconds>")
 def right(seconds):
     """right method"""
     turn_rgt = Turn()
