@@ -7,7 +7,12 @@
     <button id="ledbutton{{led}}" class="{% if status == 1 %}on{% else %}off{% endif %}" onclick="toggleLed({{led}});">{{led}}</button>
   {% endfor %}
 {% endfor %}
-
+<p>
+<h3>Walker</h3>
+<input id="number" name="number" value="5">
+<input id="delay" name="delay" value="50">
+<button id="walkerbutton" onclick="startWalker()">start</button><br>
+<button id="checkstatusbutton" onclick="checkStatus()">Check status of leds</button><p>
 <div id="logging"></div>
 <script type="text/javascript">
 function setLedButtonClass(led_id, led_status) {
@@ -38,6 +43,35 @@ function toggleLed(led) {
   xhr.open('GET', '/toggle/' + led, true);
   xhr.send(null);
 }
+
+function startWalker() {
+  var number = document.getElementById('number').value;
+  var delay = document.getElementById('delay').value;
+
+  var xhr = new XMLHttpRequest();
+  xhr.onreadystatechange = function() {
+      if (xhr.readyState == XMLHttpRequest.DONE) {
+        var loggingDiv = document.getElementById('logging');
+        loggingDiv.innerHTML = 'start walker ' + xhr.responseText + '<br>';
+      }
+  }
+  xhr.open('GET', '/walker/' + delay + "/" + number, true);
+  xhr.send(null);  
+}
+
+function checkStatus() {
+  var xhr = new XMLHttpRequest();
+  xhr.onreadystatechange = function() {
+      if (xhr.readyState == XMLHttpRequest.DONE) {
+        var loggingDiv = document.getElementById('logging');
+        loggingDiv.innerHTML = xhr.responseText + '<br>' + loggingDiv.innerHTML;
+        toggleLedButtonClass(led);
+      }
+  }
+  xhr.open('GET', '/status', true);
+  xhr.send(null);  
+}
+
 (function() {
   var ledstatus = '{{ ledstatus }}';
   console.log(ledstatus);
